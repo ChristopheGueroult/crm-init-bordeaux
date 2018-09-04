@@ -1,0 +1,90 @@
+<div class="container">
+  <form class="form"  #ngForm="ngForm" novalidate [formGroup]="form" (ngSubmit)="process()">
+
+    <div class="row form-group">
+      <div class="col">
+        <label> Type Prestation</label>
+        <select class="form-control" formControlName="type">
+          <option *ngFor="let type of types" [ngValue]="type">{{ type }}</option>
+        </select>
+      </div>
+      <div class="col">
+        <label> Intitulé</label>
+        <input type="text" class="form-control" placeholder="Intitulé" formControlName="intitule">
+        <div class="alert alert-danger" *ngIf="form.get('intitule').invalid && form.get('intitule').touched">Champs invalide</div>
+        <!-- ex : for the next, write isError function in ts -->
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col">
+        <label> Client</label> <fa-icon [icon]="faPlusCircle" (click)="addClient()"></fa-icon>
+        <select class="form-control" formControlName="client" *ngIf="clients$ | async as clients">
+          <option *ngFor="let item of clients" [ngValue]="item.name">{{ item.name }}</option>
+        </select>
+      </div>
+      <div class="col">
+        <label> lieu</label>
+        <input type="text" class="form-control" placeholder="Lieu" formControlName="lieu">
+        <div class="alert alert-danger" *ngIf="isError('lieu')">Champs invalide</div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col">
+        <label> Date début</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="Date début yyyy-mm-dd" name="dp" formControlName="date_debut"
+            ngbDatepicker #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+              <img src="./assets/img/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <label> Date fin</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="Date fin yyyy-mm-dd" name="dp" formControlName="date_fin"
+            ngbDatepicker #d2="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+              <img src="./assets/img/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col">
+        <label> TJM HT</label>
+        <input type="text" class="form-control" placeholder="TJM HT" formControlName="tjm_ht">
+      </div>
+      <div class="col">
+        <label>Durée</label>
+        <input type="text" class="form-control" placeholder="Durée" formControlName="nb_jours">
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+      <div class="col">
+        <label> Status Prestation</label>
+        <select class="form-control" formControlName="state">
+          <option *ngFor="let state of states" [ngValue]="state">{{ state }}</option>
+        </select>
+      </div>
+      <div class="col">
+        <label> Taux tva</label>
+        <input type="text" class="form-control" placeholder="TVA" formControlName="taux_tva">
+      </div>
+    </div>
+
+    <button type="button" [routerLink]="['/prestations/chart']" routerLinkActive="router-link-active"  class="btn btn-outline-primary">Return to Chart</button>
+
+    <button type="submit" [disabled]="form.invalid" class="btn btn-outline-primary">Valider</button>
+
+  </form>
+</div>

@@ -1,0 +1,7 @@
+h1 {
+  color: green;
+}
+
+:host-context(app-template-two) h1 {
+  color: red;
+}

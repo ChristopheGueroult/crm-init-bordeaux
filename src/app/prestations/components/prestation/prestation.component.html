@@ -1,0 +1,18 @@
+  <td #f>{{ item.type }}</td>
+  <td>{{ item.intitule }}</td>
+  <td>{{ item.client | uppercase }}</td>
+  <td>{{ (item.date_debut | date) || 'ND' }}</td>
+  <td>{{ (item.date_fin | date) || 'ND' }}</td>
+  <td>{{ item.tjm_ht | localCurrency }}</td>
+  <td>{{ item.nb_jours }}</td>
+  <td>{{ item | total  | localCurrency}}</td>
+  <td>{{ item | total: item.taux_tva | localCurrency }}</td>
+  <td>
+    <ng-template #popContent>
+      <button *ngFor="let option of options" (click)="$event.stopPropagation(); p.close(); process(item, option);" [appStatePresta]="option">{{ option }}</button>
+    </ng-template>
+    <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContent" placement="bottom-right" triggers="manual"
+      #p="ngbPopover" (click)="$event.stopPropagation(); p.toggle()" [appStatePresta]="item.state">
+      {{ item.state }}
+    </button>
+  </td>

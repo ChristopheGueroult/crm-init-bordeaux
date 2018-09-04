@@ -1,0 +1,13 @@
+@import "~src/variables";
+
+.header {
+  height: $header-height;
+  .title {
+    padding: 0 $gutter;
+  }
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+  }
+}

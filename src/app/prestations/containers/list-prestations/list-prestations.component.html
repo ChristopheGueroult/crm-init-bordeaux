@@ -1,0 +1,11 @@
+<input type="text" #ref (keyup)="$event">
+<app-tab [headers]="headers" *ngIf="(collection$ | async)  as collection ">
+
+  <ng-container *ngFor="let row of collection | filter:ref.value">
+    <app-prestation [item]="row" [routerLink]="['edit', row.id]">
+    </app-prestation>
+  </ng-container>
+  <tr>
+    <a [routerLink]="['add']" routerLinkActive="router-link-active" ><fa-icon [icon]="faPlusCircle"></fa-icon> Ajouter une prestation</a>
+  </tr>
+</app-tab>

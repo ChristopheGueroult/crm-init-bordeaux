@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "public": "dist/tdd-crm-init",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
